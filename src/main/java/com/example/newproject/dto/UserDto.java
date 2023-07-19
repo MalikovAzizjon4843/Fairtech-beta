@@ -1,6 +1,9 @@
 package com.example.newproject.dto;
 
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -14,9 +17,12 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
+//@Table(name = "users")
 public class UserDto {
 
     private String nameUz, nameEn, nameLt, nameRu;
+
     private int count;
-    private LocalDateTime date;
+//
+    private String date;
 }

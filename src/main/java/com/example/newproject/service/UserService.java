@@ -30,6 +30,26 @@ public class UserService {
                 .build();
     }
 
+    public ApiResponse<User> getOne(Long id) {
+
+        Optional<User> userOptional = repository.findById(id);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            return ApiResponse.<User>builder().
+                    success(true).
+                    status(200).
+                    message("User here").
+                    data(user).
+                    build();
+        }
+        return ApiResponse.<User>builder().
+                success(false).
+                status(400).
+                message("User is not found").
+                build();
+    }
+
+
 
 
     public ApiResponse<User> add(UserDto dto){
@@ -38,6 +58,8 @@ public class UserService {
                 .nameEn(dto.getNameEn())
                 .nameLt(dto.getNameLt())
                 .nameRu(dto.getNameRu())
+                .count(dto.getCount())
+                .date(dto.getDate())
                 .build();
         User newUser = repository.save(user);
         return ApiResponse.<User>builder()
@@ -65,6 +87,8 @@ public class UserService {
                 .nameEn(dto.getNameEn())
                 .nameLt(dto.getNameLt())
                 .nameRu(dto.getNameRu())
+                .count(dto.getCount())
+                .date(dto.getDate())
                 .build();
         User newUser = repository.save(user);
         return ApiResponse.<User>builder()

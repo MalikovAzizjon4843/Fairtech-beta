@@ -12,25 +12,23 @@ import java.time.LocalDate;
  */
 
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @Builder
+@Entity(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "text")
+//    @Column(nullable = false)
     private String nameUz, nameEn, nameLt, nameRu;
 
     private int count;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @NotNull
-    private LocalDate date;
+    private String date;
 }
