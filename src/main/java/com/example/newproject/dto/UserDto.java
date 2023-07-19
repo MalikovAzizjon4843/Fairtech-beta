@@ -14,8 +14,7 @@ import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @ToString
 //@Table(name = "users")
 public class UserDto {
