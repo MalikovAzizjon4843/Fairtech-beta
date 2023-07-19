@@ -1,0 +1,42 @@
+GET http://localhost:8081/api/user
+
+
+##
+
+
+
+
+
+###
+POST http://localhost:8081/api/user
+Content-Type: application/json
+
+{
+  "nameUZ" : "Aziz",
+  "nameEn": "Aziz",
+  "nameLt": "Aziz",
+  "nameRu" : "Азиз",
+  "count" : 1,
+  "date" : "30-08-2023"
+}
+
+###
+
+
+DELETE http://localhost:8081/api/user/2
+
+
+
+###
+
+PUT http://localhost:8081/api/user/1
+Content-Type: application/json
+
+{
+  "nameUZ" : "Toshkent",
+  "nameEn": "Tashkent",
+  "nameLt": "Tashkent",
+  "nameRu" : "Ташкент",
+  "count" : 1,
+  "date" : "19-07-2023"
+}
