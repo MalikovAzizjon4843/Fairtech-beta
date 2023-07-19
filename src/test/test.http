@@ -9,12 +9,12 @@ POST http://localhost:8081/api/user
 Content-Type: application/json
 
 {
-  "nameUz" : "Ilhom",
-  "nameEn": "Ilhom",
-  "nameLt": "Aziz",
-  "nameRu" : "Азиз",
-  "count" : 1,
-  "date" : "30-08-2023"
+  "nameUz" : "Jackie Chan",
+  "nameEn": "Jackie Chan",
+  "nameLt": "Jackie Chan",
+  "nameRu" : "Jackie Chan",
+  "count" : 6,
+  "date" : "15-05-2015"
 }
 
 ###

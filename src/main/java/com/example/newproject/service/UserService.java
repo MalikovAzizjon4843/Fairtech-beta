@@ -2,11 +2,19 @@ package com.example.newproject.service;
 
 import com.example.newproject.dto.ApiResponse;
 import com.example.newproject.dto.UserDto;
+import com.example.newproject.entity.Pagination;
 import com.example.newproject.entity.User;
 import com.example.newproject.repository.UserRepository;
+import com.example.newproject.utility.PageWrapper;
+import com.example.newproject.utility.Utils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,10 +26,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository repository;
+    private UserRepository repository;
+
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
 
     public ApiResponse<List<User>> getAll(){
-        List<User> users = repository.findAll();
+        List<User> users = (List<User>) repository.findAll();
         return ApiResponse.<List<User>>builder()
                 .data(users)
                 .message("Success")
@@ -50,17 +62,43 @@ public class UserService {
     }
 
 
+    public ResponseEntity<PageWrapper> search(Pagination<User> pagination, Optional<String> keyword) throws ParseException {
+        Page<User> userPage;
+        if (keyword.isPresent() && !keyword.get().equals("")) {
+            userPage = search(keyword.get().toLowerCase(), pagination);
+        } else {
+            userPage = search("", pagination);
+        }
+        List<User> users = userPage.getContent();
+        List<UserDto> userDtos = new ArrayList<>(users.size());
+        for (User user : users) {
+            userDtos.add(new UserDto(user));
+        }
+        return ResponseEntity.ok(PageWrapper.builder().list(userDtos).
+                total(userPage.getTotalElements()).build());
+    }
+
+    public Page<User> search(String keyword, Pagination pagination) {
+        Pageable paging = Utils.getPageableFromPagination(pagination);
+        Page<User> pagedResult;
+        if (!keyword.equals("")) {
+            pagedResult = repository.findAll(keyword, paging);
+        } else {
+            pagedResult = repository.findAll(paging);
+        }
+        return pagedResult;
+    }
 
 
     public ApiResponse<User> add(UserDto dto){
-        User user = User.builder()
-                .nameUz(dto.getNameUz())
-                .nameEn(dto.getNameEn())
-                .nameLt(dto.getNameLt())
-                .nameRu(dto.getNameRu())
-                .count(dto.getCount())
-                .date(dto.getDate())
-                .build();
+        User user = dto.convertToUser();
+//                .nameUz(dto.getNameUz())
+//                .nameEn(dto.getNameEn())
+//                .nameLt(dto.getNameLt())
+//                .nameRu(dto.getNameRu())
+//                .count(dto.getCount())
+//                .date(dto.getDate())
+//                .build();
         User newUser = repository.save(user);
         return ApiResponse.<User>builder()
                 .success(true)
@@ -82,14 +120,14 @@ public class UserService {
                     .build();
         }
         User user = optionalUser.get();
-        user = user.builder()
-                .nameUz(dto.getNameUz())
-                .nameEn(dto.getNameEn())
-                .nameLt(dto.getNameLt())
-                .nameRu(dto.getNameRu())
-                .count(dto.getCount())
-                .date(dto.getDate())
-                .build();
+        user = dto.convertToUser();
+//                .nameUz(dto.getNameUz())
+//                .nameEn(dto.getNameEn())
+//                .nameLt(dto.getNameLt())
+//                .nameRu(dto.getNameRu())
+//                .count(dto.getCount())
+//                .date(dto.getDate())
+//                .build();
         User newUser = repository.save(user);
         return ApiResponse.<User>builder()
                 .success(true)

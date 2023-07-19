@@ -14,10 +14,7 @@ import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
-@Builder
+@Data
 @Entity(name = "users")
 public class User {
 
@@ -25,10 +22,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Column(nullable = false)
+    @Column(nullable = false)
     private String nameUz, nameEn, nameLt, nameRu;
 
-    private int count;
+    private long count;
 
     private String date;
 }

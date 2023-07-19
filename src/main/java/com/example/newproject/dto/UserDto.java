@@ -1,5 +1,6 @@
 package com.example.newproject.dto;
 
+import com.example.newproject.entity.User;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -18,10 +19,37 @@ import java.time.LocalDateTime;
 @ToString
 //@Table(name = "users")
 public class UserDto {
-
+    private Long id;
     private String nameUz, nameEn, nameLt, nameRu;
 
-    private int count;
-//
+    private long count;
+
     private String date;
+
+
+    public UserDto(User user) {
+        if (user.getId() != null) {
+            setId(user.getId());
+        }
+        setNameUz(user.getNameUz());
+        setNameEn(user.getNameEn());
+        setNameLt(user.getNameLt());
+        setNameRu(user.getNameRu());
+    }
+
+    public User convertToUser() {
+        User user = new User();
+        return convertToUser(user);
+    }
+
+    private User convertToUser(User user) {
+        if (id != null)
+            user.setId(id);
+        user.setNameRu(nameRu);
+        user.setNameUz(nameUz);
+        user.setNameEn(nameEn);
+        user.setNameLt(nameLt);
+
+        return user;
+    }
 }
