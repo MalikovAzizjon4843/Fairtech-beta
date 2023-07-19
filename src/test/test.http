@@ -12,8 +12,8 @@ POST http://localhost:8081/api/user
 Content-Type: application/json
 
 {
-  "nameUZ" : "Aziz",
-  "nameEn": "Aziz",
+  "nameUz" : "Ilhom",
+  "nameEn": "Ilhom",
   "nameLt": "Aziz",
   "nameRu" : "Азиз",
   "count" : 1,
@@ -23,17 +23,17 @@ Content-Type: application/json
 ###
 
 
-DELETE http://localhost:8081/api/user/2
+DELETE http://localhost:8081/api/user/3
 
 
 
 ###
 
-PUT http://localhost:8081/api/user/1
+PUT http://localhost:8081/api/user/2
 Content-Type: application/json
 
 {
-  "nameUZ" : "Toshkent",
+  "nameUz" : "Toshkent",
   "nameEn": "Tashkent",
   "nameLt": "Tashkent",
   "nameRu" : "Ташкент",
