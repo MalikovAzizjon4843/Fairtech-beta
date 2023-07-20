@@ -27,6 +27,7 @@ public class UserDto {
     private String date;
 
 
+    //  dto cast to entity
     public UserDto(User user) {
         if (user.getId() != null) {
             setId(user.getId());
@@ -37,6 +38,10 @@ public class UserDto {
         setNameRu(user.getNameRu());
     }
 
+
+
+
+    // data cast to dto
     public User convertToUser() {
         User user = new User();
         return convertToUser(user);

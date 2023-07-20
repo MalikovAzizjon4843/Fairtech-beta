@@ -8,6 +8,8 @@ import com.example.newproject.repository.UserRepository;
 import com.example.newproject.utility.PageWrapper;
 import com.example.newproject.utility.Utils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +25,11 @@ import java.util.Optional;
  */
 
 @Service
-@RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
-    private UserRepository repository;
+//    @Autowired
+    public UserRepository repository;
 
     public UserService(UserRepository repository) {
         this.repository = repository;
@@ -84,7 +87,7 @@ public class UserService {
         if (!keyword.equals("")) {
             pagedResult = repository.findAll(keyword, paging);
         } else {
-            pagedResult = repository.findAll(paging);
+            pagedResult = repository.findAll1(paging);
         }
         return pagedResult;
     }
