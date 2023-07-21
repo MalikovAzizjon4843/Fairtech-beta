@@ -20,11 +20,15 @@ public class AuthorizationPhoneSendCodesController {
     @Autowired
     public AuthorizationPhoneSendCodesService authorizationPhoneSendCodesService;
 
+
+    // send sms code
     @PostMapping("/send-code")
     public ResponseEntity<String> sendsms(@RequestParam(name = "phoneNumber") String phoneNumber){
         return authorizationPhoneSendCodesService.sendMessage(phoneNumber);
     }
 
+
+    // checking sms code
     @PostMapping("/check-code")
     public ResponseEntity<String> checkCode(@RequestParam(name = "code") Long code,
                                             @RequestParam(name = "phoneNumber") String phoneNumber){
