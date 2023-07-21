@@ -63,6 +63,8 @@ public class UserService {
     }
 
 
+
+    // search service with keyword
     public ResponseEntity<PageWrapper> search(Pagination<User> pagination, Optional<String> keyword) throws ParseException {
         Page<User> userPage;
         if (keyword.isPresent() && !keyword.get().equals("")) {

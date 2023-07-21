@@ -16,6 +16,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
 //    List<User> findAllByNameRuLikeOrNameUzLikeOrNameLtLikeOrNameEnLike(String nameRu, String nameUz, String nameLt, String nameEn);
 
+
+    // searching with keyword
     @Query("select m from User m order by m.nameEn ")
     Page<User> findAll1(Pageable paging);
 

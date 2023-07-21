@@ -31,6 +31,8 @@ public class UserController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+
+    // list searching with keyword
     @PostMapping("/list-search")
 //    @PreAuthorize("hasAuthority('list pharm medication')")
     public ResponseEntity<PageWrapper> search(@RequestBody Pagination<User> pagination, @RequestParam(name = "keyword", required = false) Optional<String> keyword) throws ParseException {
